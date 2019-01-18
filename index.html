@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>quiz2ShoppingList</title>
+<style>
+    button {
+        background-color: aquamarine;
+        border: 2px solid black;
+    }
+    .crossed {
+        text-decoration: line-through;
+    }
+</style>
+
+</head>
+<body>
+    <form action="#">
+        <h1>Shopping List</h1>
+        <input value="" id="info" type="text">
+        <br>
+        <button onclick="addList()">Insert</button>
+        <button onclick="deleteAll()">Delete All</button>
+    </form>
+
+    <ul id="list"></ul>
+
+
+    <script type="text/javascript">
+    var list = document.getElementById("list");
+    
+    function addList() {
+        var input = document.getElementById("info");
+        var li = document.createElement("li");
+        var text = document.createTextNode(input.value);
+        var deletelink = document.createElement("a");
+        var linktext = document.createTextNode("Delete");
+        list.appendChild(li);
+        li.appendChild(text);
+        li.appendChild(deletelink);
+        deletelink.appendChild(linktext);
+        input.value = "";
+        input.focus();
+        deletelink.href = "#";
+        deletelink.onclick = deleteItem;
+    }
+
+    function deleteItem() {
+        var li = this.parentNode;
+        li.removeChild(this);
+        li.classList.add("crossed");   
+    }
+
+    function deleteAll(){
+        var lis = document.getElementsByClassName("crossed");
+        Array.from(lis).forEach(function(li){
+            li.parentNode.removeChild(li);
+        });
+    }
+    </script>
+</body>
+</html>
